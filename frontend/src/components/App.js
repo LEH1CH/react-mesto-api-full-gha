@@ -38,6 +38,7 @@ function App() {
     name: '',
     about: '',
     avatar: '',
+    _id: '',
   });
   const [cards, setCards] = useState([]);
   const [cardToDelete, setCardToDelete] = useState(null);
@@ -46,31 +47,15 @@ function App() {
   const [isLoggedUp, setIsLoggedUp] = useState(false);
   const [page, setPage] = useState('');
   const [email, setEmail] = useState('');
-
-  //Получаем с сервера данные пользователя
-  React.useEffect(
-    function () {
-      if (isLoggedIn) {
-        api
-          .getProfileData()
-          .then((data) => {
-            setCurrentUser(data);
-          })
-          .catch((err) => {
-            alert(`Не удалось загрузить данные профиля! Ошибка: ${err}`);
-          });
-      }
-    },
-    [isLoggedIn]
-  );
+  const [token, setToken] = useState('');
 
   //Получаем с сервера данные карточек
   React.useEffect(
     function () {
       if (isLoggedIn) {
         api
-          .getInitialCards()
-          .then((data) => {
+          .getInitialCards(token)
+          .then(({ data }) => {
             setCards(data);
           })
           .catch((err) => {
@@ -136,13 +121,11 @@ function App() {
 
   //Обработчик клика по лайку
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api
-      .changeLikeCardStatus(card._id, isLiked)
-      .then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
+      .changeLikeCardStatus(card._id, isLiked, token)
+      .then(({ data }) => {
+        setCards((state) => state.map((c) => (c._id === card._id ? data : c)));
       })
       .catch((err) => {
         alert(`Не удалось поставить лайк! Ошибка: ${err}`);
@@ -159,7 +142,7 @@ function App() {
   function handleConfirmCardDelete() {
     setIsSaving(true);
     api
-      .deleteCard(cardToDelete._id)
+      .deleteCard(cardToDelete._id, token)
       .then((newCard) => {
         setCards((state) => state.filter((c) => c._id !== cardToDelete._id));
         closeAllPopups();
@@ -171,12 +154,12 @@ function App() {
   }
 
   //Обработчик сохранения новых данных пользователя на сервере
-  function handleUpdateUser(newProfileData) {
+  function handleUpdateUser(newUserData) {
     setIsSaving(true);
     api
-      .modifyProfileData(newProfileData)
-      .then((data) => {
-        setCurrentUser(data);
+      .modifyProfileData(newUserData, token)
+      .then(({ data }) => {
+        setCurrentUser({ ...currentUser, name: data.name, about: data.about });
         closeAllPopups();
       })
       .catch((err) => {
@@ -189,9 +172,9 @@ function App() {
   function handleUpdateAvatar(newLink) {
     setIsSaving(true);
     api
-      .setUserAvatar(newLink)
-      .then((data) => {
-        setCurrentUser(data);
+      .setUserAvatar(newLink, token)
+      .then(({ data }) => {
+        setCurrentUser({ ...currentUser, avatar: data.avatar });
         closeAllPopups();
       })
       .catch((err) => {
@@ -204,8 +187,8 @@ function App() {
   function handleAddPlaceSubmit(newPlaceData) {
     setIsSaving(true);
     api
-      .addNewCard(newPlaceData)
-      .then((data) => {
+      .addNewCard(newPlaceData, token)
+      .then(({ data }) => {
         setCards([data, ...cards]);
         closeAllPopups();
       })
@@ -225,7 +208,7 @@ function App() {
       })
       .catch((err) => {
         setIsLoggedUp(false);
-        console.log(`Не удалось зарегистрировать пользователя! Ошибка: ${err}`);
+        alert(`Не удалось зарегистрировать пользователя! Ошибка: ${err}`);
       })
       .finally(() => setInfoTooltipOpen(true));
   }
@@ -236,16 +219,10 @@ function App() {
       .login(userData)
       .then((data) => {
         localStorage.setItem('token', data.token);
-        setIsLoggedUp(true);
-        setIsLoggedIn(true); // Устанавливаем флаг аутентификации в true
-        setEmail(userData.email); // Записываем email пользователя
-        navigate('/cards', { replace: true });
         handleAuthCheck();
       })
       .catch((err) => {
-        setIsLoggedUp(false);
-        setInfoTooltipOpen(true);
-        console.log(`Не удалось войти в систему! Ошибка: ${err}`);
+        alert(`Не удалось войти в систему! Ошибка: ${err}`);
       });
   }
 
@@ -253,6 +230,7 @@ function App() {
   function handleLogout() {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
+    setToken('');
     setEmail('');
     navigate('/sign-in', { replace: true });
   }
@@ -265,7 +243,14 @@ function App() {
         .authCheck(jwt)
         .then(({ data }) => {
           setIsLoggedIn(true);
+          setToken(jwt);
           setEmail(data.email);
+          setCurrentUser({
+            name: data.name,
+            about: data.about,
+            avatar: data.avatar,
+            _id: data._id,
+          });
           navigate('/cards', { replace: true });
         })
         .catch((err) => {
