@@ -1,0 +1,13 @@
+.header__email {
+    display:inline-block;
+    margin: 0 24px 0 0;
+    vertical-align: bottom;
+    color: white;
+    font-size: 18px;
+    line-height: calc(22/18);
+    font-weight: 500;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

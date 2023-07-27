@@ -1,0 +1,15 @@
+.sign__form {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-sizing: border-box;
+  }
+  
+  @media (max-width:600px) {
+    .sign__form {
+      padding: 25px 11px;
+    }
+  }

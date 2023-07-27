@@ -1,0 +1,16 @@
+.popup__container {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 34px 36px 37px 36px;
+  box-sizing: border-box;
+}
+
+@media (max-width:600px) {
+  .popup__container {
+    padding: 25px 22px;
+  }
+}

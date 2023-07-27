@@ -1,0 +1,12 @@
+.cards__image {
+    width: 282px;
+    height: 282px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px 10px 0 0;
+    grid-row: 1;
+    grid-column: 1;
+    cursor: pointer;
+    background-color: #000;
+  }
+  

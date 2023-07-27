@@ -1,0 +1,12 @@
+.sign {
+    width: 100%;
+    background-color: transparent;
+    padding-top: 60px;
+    padding-bottom:41px;
+  }
+  
+  @media (max-width:600px) {
+    .sign {
+      padding-top: 14px;
+    }
+  }

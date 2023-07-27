@@ -1,0 +1,10 @@
+.header__btn_type_burger {
+    width: 24px;
+    height: 18px;
+    border-color: white;
+    background-image: url(../../../../images/burger.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-right: 30px;
+  }

@@ -1,0 +1,15 @@
+.profile__pers-data {
+  max-width: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+}
+
+@media (max-width: 600px) {
+  .profile__pers-data {
+    flex-direction: column;
+    gap: 26px;
+  }
+}

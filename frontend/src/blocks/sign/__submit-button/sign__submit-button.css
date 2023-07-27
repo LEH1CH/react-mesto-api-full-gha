@@ -1,0 +1,38 @@
+.sign__submit-button {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    color: #000;
+    border: 0;
+    font-size: 18px;
+    line-height: calc(21.78/18);
+    font-weight: 400;
+    width: 100%;
+    height: 50px;
+    margin-top: 186px;
+    transition: opacity 0.2s;
+    cursor: pointer;
+    border-radius: 2px;
+  }  
+  
+  @media (max-width:600px) {
+    .sign__submit-button {
+      margin-top: 143px;
+      height: 46px;
+      font-size: 16px;
+      line-height: calc(19.36/16);
+    }
+  }
+  
+  .sign__submit-button:hover {
+    opacity: 0.85;
+  }
+  
+  .sign__submit-button_inactive {
+    transition: none;
+    opacity: 0.2;
+    background-color: transparent;
+    color:#000;
+    border: 1px solid #000;
+    pointer-events: none;
+  }

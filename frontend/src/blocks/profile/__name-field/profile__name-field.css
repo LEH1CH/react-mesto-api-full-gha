@@ -1,0 +1,22 @@
+.profile__name-field {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: baseline;
+  max-width: 450px;
+  gap: 18px;
+  position: relative;
+}
+
+@media (max-width: 800px) {
+  .profile__name-field {
+    max-width: calc(450px - 20px - (800px - 100vw));
+  }
+}
+
+@media (max-width: 600px) {
+  .profile__name-field {
+    gap: 10px;
+    max-width: 85vw;
+  }
+}

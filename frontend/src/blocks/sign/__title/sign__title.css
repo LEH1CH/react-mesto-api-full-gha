@@ -1,0 +1,18 @@
+.sign__title {
+    width: 100%;
+    margin: 0;
+    color: #fff;
+    font-size: 24px;
+    line-height: calc(29/24);
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  
+  @media (max-width:600px) {
+    .sign__title {
+      font-size: 20px;
+      line-height: calc(24.2/20);
+      margin-bottom: 4px;
+    }
+  }

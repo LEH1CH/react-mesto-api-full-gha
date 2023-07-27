@@ -1,0 +1,11 @@
+.sign__fieldset {
+    display: inline-block;
+    margin-top:39px;
+    padding: 0;
+    border: none;
+    width: 100%;
+  }
+  
+  .sign__fieldset:last-of-type {
+    margin-top: 0;
+  }

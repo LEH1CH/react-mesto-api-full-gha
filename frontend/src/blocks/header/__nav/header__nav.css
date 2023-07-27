@@ -1,0 +1,10 @@
+.header__nav {
+    margin:0;
+  }
+  
+  /*
+  @media (max-width: 600px) {
+    .header__nav {
+      display:none;
+    }
+  }*/
