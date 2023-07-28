@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.115.238
+IP 158.160.115.238
 
 Frontend https://leh1ch.nomoredomains.sbs/cards
 

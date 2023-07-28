@@ -1,13 +1,11 @@
 const express = require('express');
 
-// eslint-disable-next-line import/no-extraneous-dependencies
 require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
-// eslint-disable-next-line import/no-extraneous-dependencies
 const cors = require('cors');
 const { login, createUser } = require('./controllers/user');
 const auth = require('./middlewares/auth');
