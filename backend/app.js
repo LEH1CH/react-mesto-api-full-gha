@@ -1,20 +1,35 @@
 const express = require('express');
 
+// eslint-disable-next-line import/no-extraneous-dependencies
+require('dotenv').config();
+
 const { PORT = 3000 } = process.env;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const cors = require('cors');
 const { login, createUser } = require('./controllers/user');
 const auth = require('./middlewares/auth');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const NotFoundError = require('./errors/not-found-error');
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 
 const app = express();
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 1000);
+});
 
 app.post(
   '/signin',
@@ -55,6 +70,8 @@ app.use('/users', require('./routes/users'));
 app.use('/cards', require('./routes/cards'));
 
 app.use('/', (req, res, next) => next(new NotFoundError('Страница не найдена')));
+
+app.use(errorLogger);
 
 app.use(errors());
 

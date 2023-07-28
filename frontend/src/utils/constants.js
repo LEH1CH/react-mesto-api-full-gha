@@ -10,7 +10,7 @@ export const config = {
 
 //Данные для api связи с сервером
 export const connectionConfig = {
-  server: '',
+  server: 'http://158.160.117.153:3000',
   profileDataPath: 'users/me',
   cardsDataPath: 'cards',
   token: '9015b21c-073a-42b5-b160-2016f514138f',
@@ -18,7 +18,7 @@ export const connectionConfig = {
 };
 
 export const authConfig = {
-  server: '',
+  server: 'http://158.160.117.153:3000',
   registerPath: 'signup',
   loginPath: 'signin',
   authCheckPath: 'users/me',
