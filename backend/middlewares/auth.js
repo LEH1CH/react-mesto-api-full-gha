@@ -4,7 +4,6 @@ const { devKey } = require('../utils/devkey');
 const { NODE_ENV, JWT_SECRET } = process.env;
 const AuthError = require('../errors/auth-error');
 
-// eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 

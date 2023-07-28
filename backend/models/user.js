@@ -1,5 +1,3 @@
-/* eslint-disable prefer-regex-literals */
-
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
@@ -23,7 +21,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       validate: {
         validator(v) {
-          // eslint-disable-next-line no-useless-escape
           return /^https?:\/\/(www\.)?[a-z0-9\-._~:/?#[\]@!$&'()*+,;=]+#?$/i.test(
             v,
           );
@@ -55,7 +52,6 @@ const userSchema = new mongoose.Schema(
   },
 );
 
-// eslint-disable-next-line func-names
 userSchema.statics.findUserByCredentials = function (email, password) {
   return this.findOne({ email })
     .select('+password')

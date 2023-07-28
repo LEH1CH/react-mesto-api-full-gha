@@ -1,5 +1,3 @@
-/* eslint-disable prefer-regex-literals */
-
 const mongoose = require('mongoose');
 
 const cardSchema = new mongoose.Schema(
