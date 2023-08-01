@@ -1,7 +1,7 @@
-import logo from "../images/header-logo.svg";
-import { NavLink } from "react-router-dom";
-import React from "react";
-import useWindowDimensions from "../hooks/useWindowDimensions.js";
+import logo from '../images/header__logo';
+import { NavLink } from 'react-router-dom';
+import React from 'react';
+import useWindowDimensions from '../hooks/useWindowDimensions.js';
 
 function Header(props) {
   const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
@@ -27,13 +27,13 @@ function Header(props) {
   return (
     <header>
       {isBurgerOpen && props.loggedIn ? (
-        <div className="header header_type_burger">
-          <span className="header__email header__email_type_burger">
+        <div className='header header_type_burger'>
+          <span className='header__email header__email_type_burger'>
             {props.email}
           </span>
           <button
             onClick={handleLogoutClick}
-            className="header__btn header__btn_type_text link-transparency link"
+            className='header__btn header__btn_type_text link-transparency link'
           >
             Выйти
           </button>
@@ -42,18 +42,18 @@ function Header(props) {
         <></>
       )}
 
-      <div className="header">
-        <img src={logo} className="header__logo" alt="Логотип Mesto" />
-        <div className="header__nav">
+      <div className='header'>
+        <img src={logo} className='header__logo' alt='Логотип Mesto' />
+        <div className='header__nav'>
           {props.loggedIn ? (
             width > 600 ? (
               <>
                 {props.email && (
-                  <span className="header__email">{props.email}</span>
+                  <span className='header__email'>{props.email}</span>
                 )}
                 <button
                   onClick={handleLogoutClick}
-                  className="header__btn header__btn_type_text link-transparency link"
+                  className='header__btn header__btn_type_text link-transparency link'
                 >
                   Выйти
                 </button>
@@ -63,17 +63,17 @@ function Header(props) {
                 onClick={handleBurgerClick}
                 className={
                   isBurgerOpen
-                    ? "header__btn header__btn_type_close link-transparency link"
-                    : "header__btn header__btn_type_burger link-transparency link"
+                    ? 'header__btn header__btn_type_close link-transparency link'
+                    : 'header__btn header__btn_type_burger link-transparency link'
                 }
               />
             )
           ) : (
             <NavLink
-              to={props.page === "/sign-up" ? "/sign-in" : "/sign-up"}
-              className="header__link link-transparency"
+              to={props.page === '/sign-up' ? '/sign-in' : '/sign-up'}
+              className='header__link link-transparency'
             >
-              {props.page === "/sign-up" ? "Войти" : "Регистрация"}
+              {props.page === '/sign-up' ? 'Войти' : 'Регистрация'}
             </NavLink>
           )}
         </div>
