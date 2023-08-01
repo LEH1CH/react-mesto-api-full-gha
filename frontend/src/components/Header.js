@@ -1,4 +1,4 @@
-import logo from '../images/header__logo';
+import logo from '../images/header__logo.svg';
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 import useWindowDimensions from '../hooks/useWindowDimensions.js';
