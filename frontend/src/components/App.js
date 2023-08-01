@@ -208,7 +208,7 @@ function App() {
       })
       .catch((err) => {
         setIsLoggedUp(false);
-        alert(`Не удалось зарегистрировать пользователя! Ошибка: ${err}`);
+        console.log(`Не удалось зарегистрировать пользователя! Ошибка: ${err}`);
       })
       .finally(() => setInfoTooltipOpen(true));
   }
@@ -219,10 +219,16 @@ function App() {
       .login(userData)
       .then((data) => {
         localStorage.setItem('token', data.token);
+        setIsLoggedUp(true);
+        setIsLoggedIn(true); // Устанавливаем флаг аутентификации в true
+        setEmail(userData.email); // Записываем email пользователя
+        navigate('/cards', { replace: true });
         handleAuthCheck();
       })
       .catch((err) => {
-        alert(`Не удалось войти в систему! Ошибка: ${err}`);
+        setIsLoggedUp(false);
+        setInfoTooltipOpen(true);
+        console.log(`Не удалось войти в систему! Ошибка: ${err}`);
       });
   }
 
@@ -254,7 +260,7 @@ function App() {
           navigate('/cards', { replace: true });
         })
         .catch((err) => {
-          alert(`Не удалось войти в систему! Ошибка: ${err}`);
+          console.log(`Не удалось войти в систему! Ошибка: ${err}`);
         });
     }
   }
