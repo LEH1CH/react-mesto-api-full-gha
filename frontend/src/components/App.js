@@ -219,14 +219,9 @@ function App() {
       .login(userData)
       .then((data) => {
         localStorage.setItem('token', data.token);
-        setIsLoggedUp(true);
-        setIsLoggedIn(true); // Устанавливаем флаг аутентификации в true
-        setEmail(userData.email); // Записываем email пользователя
-        navigate('/cards', { replace: true });
         handleAuthCheck();
       })
       .catch((err) => {
-        setIsLoggedUp(false);
         setInfoTooltipOpen(true);
         console.log(`Не удалось войти в систему! Ошибка: ${err}`);
       });
