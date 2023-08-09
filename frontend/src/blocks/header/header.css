@@ -12,6 +12,7 @@
 @media (max-width: 600px) {
   .header {
     padding-top: 28px;
-    padding-bottom:31.6px;
+    padding-bottom: 0;
+    margin: 0;
   }
 }

@@ -18,6 +18,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  filter: drop-shadow( 0 0 5px #fffbfb);
 }
 
 .profile__avatar-button:before {
